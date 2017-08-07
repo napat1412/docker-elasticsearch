@@ -4,7 +4,7 @@ LABEL maintainer "itzg"
 
 RUN apk -U add bash
 
-ENV ES_VERSION=5.4.0
+ENV ES_VERSION=5.5.1
 
 ADD https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz /tmp/es.tgz
 RUN cd /usr/share && \
@@ -26,7 +26,7 @@ VOLUME ["/data","/conf"]
 WORKDIR $ES_HOME
 
 COPY java.policy /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
-COPY start.sh /start
 COPY log4j2.properties $ES_HOME/config/
+COPY entrypoint.sh /entrypoint
 
 CMD ["/entrypoint"]
