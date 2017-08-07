@@ -138,7 +138,7 @@ OPTS="$OPTS \
   -E path.data=/data \
   -E path.logs=/data \
   -E transport.tcp.port=9300 \
-  -E http.port=9200
+  -E http.port=9200"
 
 #discoverAllGlobalIps
 if [ "${DISCOVER_TRANSPORT_IP}" != "" ]; then
