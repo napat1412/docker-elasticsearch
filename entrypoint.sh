@@ -73,6 +73,11 @@ setup_clustering() {
     OPTS="$OPTS -E network.host=$HOSTNAME"
   fi
   
+  ### Shard Allocations Awareness Attribute ###
+  if [ -n "$AWARENESS_ATTRIBUTES" ]; then
+    OPTS="$OPTS -E cluster.routing.allocation.awareness.attributes=$AWARENESS_ATTRIBUTES"
+  fi
+
   if [ -n "$NODE_ZONE" ]; then
     OPTS="$OPTS -E node.attr.zone=$NODE_ZONE"
   fi
