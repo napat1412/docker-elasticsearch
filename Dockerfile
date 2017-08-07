@@ -29,4 +29,4 @@ COPY java.policy /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/
 COPY start.sh /start
 COPY log4j2.properties $ES_HOME/config/
 
-CMD ["/start"]
+CMD ["/entrypoint"]
