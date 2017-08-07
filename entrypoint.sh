@@ -28,7 +28,8 @@ discoverAllGlobalIps() {
   while [ ${#ips} -eq 0 ]
   do
     printf "."
-    ips=`ipaddr show scope global| grep -v "inet ${IGNORE_NETWORK}" | awk '$1 == "inet" { if (!match($2,"/32")) { gsub("/.*","",$2) ; addrs[length(addrs)] = $2 } } END { for (i in addrs) { if (i>0) printf "," ; printf addrs[i] } }'`
+    ips=`ipaddr show scope global | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' \
+           | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
     sleep 1
   done
   echo " found! $ips"
@@ -68,6 +69,13 @@ setup_clustering() {
     OPTS="$OPTS -E discovery.zen.minimum_master_nodes=$MIN_MASTERS"
   fi
 
+  if [ -n "$HOSTNAME" ]; then
+    OPTS="$OPTS -E network.host=$HOSTNAME"
+  fi
+  
+  if [ -n "$NODE_RACK" ]; then
+    OPTS="$OPTS -E node.attr.rack=$NODE_RACK"
+  fi
 }
 
 install_plugins() {
@@ -130,9 +138,9 @@ OPTS="$OPTS \
   -E path.data=/data \
   -E path.logs=/data \
   -E transport.tcp.port=9300 \
-  -E http.port=9200"
+  -E http.port=9200
 
-discoverAllGlobalIps
+#discoverAllGlobalIps
 if [ "${DISCOVER_TRANSPORT_IP}" != "" ]; then
   discoverIpFromLink $DISCOVER_TRANSPORT_IP transport
 fi
