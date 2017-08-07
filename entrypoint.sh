@@ -73,8 +73,8 @@ setup_clustering() {
     OPTS="$OPTS -E network.host=$HOSTNAME"
   fi
   
-  if [ -n "$NODE_RACK" ]; then
-    OPTS="$OPTS -E node.attr.rack=$NODE_RACK"
+  if [ -n "$NODE_ZONE" ]; then
+    OPTS="$OPTS -E node.attr.zone=$NODE_ZONE"
   fi
 }
 
