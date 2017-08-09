@@ -1,3 +1,34 @@
+# docker-elasticsearch
+Docker image to run elasticsearch 5.x. User can specify Type of elasticsearch node to be master.node, or data.node by using this docker
+
+## ENV
+```
+  $ADDED_FLAGS        Pure-ftpd flag (e.g. --tls=2 --peruserlimits=4:0)
+  $MAX_CLIENT_NUMBER  Max number of client. default value is 50.
+  $MAX_CLIENTperIP    Max number of client with same IP address. Default value is 10.
+  $SERVICE_PORT       FTP service port (e.g. 21)
+  $PASSIVE_PORTRANGE  FTP passsive port range (e.g. 30000:30009)
+  $OPENSSL_SUBJ       Openssl subject (e.g. "/C=TH/ST=Phathum tani/L=Klongluang/O=Klongnoy")
+  
+  $ES_JAVA_OPTS       Memory Heap value (e.g. "-Xms1g -Xmx1g")
+  $TYPE               Type of elasticsearch node (use only "MASTER", "DATA", "GATEWAY" or "INGEST")
+  $CLUSTER            cluster-name (e.g. "es-enterprise")
+  $HOSTNAME           Bind address. Default value is 0.0.0.0.
+  $NODE_NAME          node-name (e.g. "es-ms1")
+  $UNICAST_HOSTS      List FQDN(domain name) of master.node which seperate with comma (e.g. "es-ms1,es-ms2,es-ms3"). This list assign to discovery.zen.ping.unicast.hosts 
+  $MIN_MASTERS        Number of minimum master.node to avoid split brain. This setting should be equal the (Number of master.node / 2) + 1. This value is assign to discovery.zen.minimum_master_nodes
+  
+  $AWARENESS_ATTRIBUTES  The specified attribute that elasticsearch cluster must aware when it create shard on data.node. Shard is assigned only Data.node that have this attribe (Use with $NODE_ZONE) (use only "zone" or "")  
+                         If you use "zone", elasticsearch cluster will create shard on data.node that have attribute node.attr.zone
+  $NODE_ZONE             This value is assigned to node.attr.zone (e.g. "rbd_z1")
+
+```
+
+
+
+------
+# Original README.md
+
 This Docker image provides an easily configurable Elasticsearch node. Via port mappings, it is easy to create an arbitrarily sized cluster of nodes. As long as the versions match, you can mix-and-match "real" Elasticsearch nodes with container-ized ones.
 
 # NOTE for use on Linux hosts
