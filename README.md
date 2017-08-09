@@ -3,13 +3,6 @@ Docker image to run elasticsearch 5.x. User can specify Type of elasticsearch no
 
 ## ENV
 ```
-  $ADDED_FLAGS        Pure-ftpd flag (e.g. --tls=2 --peruserlimits=4:0)
-  $MAX_CLIENT_NUMBER  Max number of client. default value is 50.
-  $MAX_CLIENTperIP    Max number of client with same IP address. Default value is 10.
-  $SERVICE_PORT       FTP service port (e.g. 21)
-  $PASSIVE_PORTRANGE  FTP passsive port range (e.g. 30000:30009)
-  $OPENSSL_SUBJ       Openssl subject (e.g. "/C=TH/ST=Phathum tani/L=Klongluang/O=Klongnoy")
-  
   $ES_JAVA_OPTS       Memory Heap value (e.g. "-Xms1g -Xmx1g")
   $TYPE               Type of elasticsearch node (use only "MASTER", "DATA", "GATEWAY" or "INGEST")
   $CLUSTER            cluster-name (e.g. "es-enterprise")
